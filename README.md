@@ -1,5 +1,5 @@
 Overview :
-The Simon Says game is a classic memory game where players must repeat a sequence of colors (or sounds) in the correct order. 
+The Simon Says game is a classic memory game where players must repeat a sequence of colors in the correct order. 
 Each round, the game adds one more color to the sequence, and the player must replicate the entire sequence from the beginning. 
 The game continues until the player makes a mistake.
 
@@ -13,4 +13,3 @@ How to Play :
 Features : 
 Increasing Difficulty: The sequence gets longer with each round, making the game progressively more challenging.
 User Interface: Colorful buttons that players can click to repeat the sequence.
-Feedback: Visual and/or auditory feedback indicating correct or incorrect sequences.
