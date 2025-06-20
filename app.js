@@ -5,10 +5,15 @@ let started = false;
 let level = 0;
 let h2 = document.querySelector("h2");
 
-function startGame() {
+function startGameWithFirstColor(firstColor) {
     if (!started) {
         started = true;
-        levelup();
+        level = 1;
+        userSeq = [];
+        gameSeq = [firstColor];
+        h2.innerText = `Level ${level}`;
+        let firstBtn = document.querySelector(`.${firstColor}`);
+        btnflash(firstBtn);
     }
 }
 
@@ -25,8 +30,8 @@ function levelup() {
     h2.innerText = `Level ${level}`;
     let randIdx = Math.floor(Math.random() * 4);
     let randcolor = btns[randIdx];
-    let randbtn = document.querySelector(`.${randcolor}`);
     gameSeq.push(randcolor);
+    let randbtn = document.querySelector(`.${randcolor}`);
     btnflash(randbtn);
 }
 
@@ -36,32 +41,30 @@ function chekans(idx) {
             setTimeout(levelup, 1000);
         }
     } else {
-        h2.innerHTML = `Game over! Your score was <b>${level}</b><br>Press any key or click to restart`;
-        document.querySelector("body").style.backgroundColor = "red";
-        setTimeout(function () {
-            document.querySelector("body").style.backgroundColor = "white";
-        }, 150);
+        h2.innerHTML = `Game over! Your score was <b>${level}</b><br>Tap to restart`;
+        document.body.style.backgroundColor = "red";
+        setTimeout(() => document.body.style.backgroundColor = "white", 150);
         reset();
     }
 }
 
 function btnpress() {
-    if (!started) return;
     let btn = this;
+    let color = btn.getAttribute("id");
+
+    if (!started) {
+        startGameWithFirstColor(color);
+        return;
+    }
+
     btnflash(btn);
-    let usercolor = btn.getAttribute("id");
-    userSeq.push(usercolor);
+    userSeq.push(color);
     chekans(userSeq.length - 1);
 }
 
-document.addEventListener("keypress", startGame);
-
 let allbtns = document.querySelectorAll(".btn");
 for (let btn of allbtns) {
-    btn.addEventListener("click", function () {
-        startGame();
-        btnpress.call(this);
-    });
+    btn.addEventListener("click", btnpress);
 }
 
 function reset() {
